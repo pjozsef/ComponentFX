@@ -13,11 +13,11 @@ import javafx.stage.Stage;
  */
 public interface FloatingStage<T extends Region> {
     /**
-     * Called when the FloatingStage gains focus.
+     * Called when the FloatingStage gains focus. Can be called progmatically.
      */
     public void grow();
     /**
-     * Called when the FloatingStage looses focus.
+     * Called when the FloatingStage looses focus. Can be called progmatically.
      */
     public void shrink();
     /**

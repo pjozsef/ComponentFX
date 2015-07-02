@@ -17,7 +17,23 @@ import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 /**
- * 
+ * An implementation of the {@code FloatingStage} interface, representing a
+ * draggable FloatingStage. While in shrunk state, this Stage can be moved
+ * freely by mouse drag gestures.
+ * <br>
+ * Developer notes: <br>
+ * The current implementation has issues on Linux desktop environments. 
+ * (Tried with Unity and KDE desktop environments)
+ * <br>
+ * The issues are:<br>
+ * <ul>
+ * <li> AlwaysOnTop setting does not work
+ * <li> Even though the resizing of the Stage is disabled, it is still possible
+ * to resize the Stage in those DEs.
+ * </ul>
+ *
+ * @param <T> the generic container type that is displayed inside a
+ * FloatingStage.
  */
 public class DraggableFloatingStage<T extends Region> extends Stage implements FloatingStage {
 
