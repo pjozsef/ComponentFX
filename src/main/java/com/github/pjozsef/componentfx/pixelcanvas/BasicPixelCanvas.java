@@ -7,7 +7,6 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 
 import java.util.List;
@@ -24,13 +23,13 @@ public class BasicPixelCanvas extends PixelCanvas {
     protected final IntegerProperty rows, columns;
     private final DoubleProperty width, height, pixelWidth, pixelHeight;
 
-    public BasicPixelCanvas(DoubleProperty w, DoubleProperty h) {
-        this.width = w;
-        this.height = h;
+    public BasicPixelCanvas(DoubleProperty width, DoubleProperty height) {
+        this.width = width;
+        this.height = height;
         this.setWidth(width.doubleValue());
         this.setHeight(height.doubleValue());
-        width.addListener((observable, oldValue, newValue) -> this.setWidth(width.doubleValue()));
-        height.addListener((observable, oldValue, newValue) -> this.setHeight(height.doubleValue()));
+        this.width.addListener((observable, oldValue, newValue) -> this.setWidth(this.width.doubleValue()));
+        this.height.addListener((observable, oldValue, newValue) -> this.setHeight(this.height.doubleValue()));
 
         this.rows = new SimpleIntegerProperty(1);
         this.columns = new SimpleIntegerProperty(1);
@@ -174,5 +173,10 @@ public class BasicPixelCanvas extends PixelCanvas {
     @Override
     protected DoubleProperty getPixelHeight() {
         return this.pixelHeight;
+    }
+
+    @Override
+    public void reize(int row, int col) {//TODO implement
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

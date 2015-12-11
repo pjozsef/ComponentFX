@@ -7,6 +7,8 @@ import javafx.scene.paint.Paint;
 import lombok.Builder;
 
 import java.util.List;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 
 /**
  * A PixelCanvas object is a wrapper around a Canvas that contains a set of rows and
@@ -18,8 +20,8 @@ public abstract class PixelCanvas extends AnchorPane {
             builderMethodName = "simpleCanvas",
             buildMethodName = "build",
             builderClassName = "BasicPixelCanvasBuilder")
-    private static PixelCanvas buildCanvas(double width, double height, int rows, int columns) {
-        return new BasicPixelCanvas(width, height, rows, columns);
+    private static PixelCanvas buildCanvas(double width, double height) {
+        return new BasicPixelCanvas(new SimpleDoubleProperty(width), new SimpleDoubleProperty(height));
     }
 
     /**
