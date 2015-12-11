@@ -1,10 +1,12 @@
 package com.github.pjozsef.componentfx.pixelcanvas;
 
-import java.util.List;
 import javafx.beans.property.ReadOnlyDoubleProperty;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Paint;
+import lombok.Builder;
+
+import java.util.List;
 
 /**
  * A PixelCanvas object is a wrapper around a Canvas that contains a set of rows and
@@ -12,8 +14,16 @@ import javafx.scene.paint.Paint;
  * convenient drawPixel and drawMatrix methods.
  */
 public abstract class PixelCanvas extends AnchorPane {
+    @Builder(
+            builderMethodName = "simpleCanvas",
+            buildMethodName = "build",
+            builderClassName = "BasicPixelCanvasBuilder")
+    private static PixelCanvas buildCanvas(double width, double height, int rows, int columns) {
+        return new BasicPixelCanvas(width, height, rows, columns);
+    }
+
     /**
-     * Draws a pixel in the canvas.
+     * Draws a pixel on the canvas.
      * @param x the x coordinate
      * @param y the y coordinate
      * @param p the paint to use
@@ -33,7 +43,7 @@ public abstract class PixelCanvas extends AnchorPane {
      * 
      * For example:
      * If the value of the element at (0,0) in the indices parameter is 1,
-     * then the element with the 1 index in the list will be used
+     * then the element with the 1th index in the list will be used
      * to color the (0,0)th pixel on the PixelCanvas.
      * 
      * @param indices the index matrix
@@ -44,19 +54,14 @@ public abstract class PixelCanvas extends AnchorPane {
     /**
      * Repaints the canvas.
      */
-    public abstract void repaint();
+    public abstract void refresh();
 
     /**
-     * Returns the row count of the canvas
-     * @return the row count of the canvas
+     * Sets the number of pixels in a row and in a column in the canvas.
+     * @param row the number of pixels in a row
+     * @param col the number of pixels in a column
      */
-    public abstract int getRows();
-
-    /**
-     * Sets the row count of the canvas.
-     * @param newRow the row count of the canvas
-     */
-    public abstract void setRows(int newRow);
+    public abstract void reize(int row, int col);
     
     /**
      * Returns the column count of the canvas
@@ -65,10 +70,10 @@ public abstract class PixelCanvas extends AnchorPane {
     public abstract int getColumns();
     
     /**
-     * Sets the column count of the canvas
-     * @param newColumn the column count of the canvas
+     * Returns the row count of the canvas
+     * @return the row count of the canvas
      */
-    public abstract void setColumns(int newColumn);
+    public abstract int getRows();
 
     /**
      * Returns the underlying Canvas object

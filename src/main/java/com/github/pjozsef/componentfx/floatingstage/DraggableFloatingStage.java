@@ -104,6 +104,7 @@ public class DraggableFloatingStage<T extends Region> extends Stage implements F
 
         this.background.setOnMousePressed(dragManager::onPress);
         this.background.setOnMouseDragged(dragManager::onDrag);
+        this.background.setOnMouseReleased(dragManager::onRelease);
     }
 
     /**
